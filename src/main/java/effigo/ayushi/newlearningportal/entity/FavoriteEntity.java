@@ -18,8 +18,8 @@ public class FavoriteEntity {
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private UserEntity user;
+	@JoinColumn(name = "registered_id")
+	private RegisterEntity registerEntity;
 	
 	
 }

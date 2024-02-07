@@ -1,0 +1,17 @@
+Requirements:
+Assignment: Learning portal
+Description: Provide free learning portal similar to Udemy
+Features: 
+- Role based access:
+	- ADMIN: Create user accounts
+ 	- AUTHOR: Can publish new courses, Edit existing courses
+	- LEARNER: Can search/enroll courses, add favorite courses
+- Courses should be in specific categories such as Java, SQL, OOPS, SPA etc., 
+
+Technical Stack: 
+Language: Java (OpenJDK17) 
+Framework: Spring
+Database: Postgres(latest version)
+Testing: POSTMAN
+IDE: Eclipse 
+Code Repository: Git-hub (learning-portal)
