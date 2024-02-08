@@ -6,11 +6,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "favorites")
+@NoArgsConstructor
+@AllArgsConstructor
 public class FavoriteEntity {
 
 	@Id
@@ -19,7 +23,5 @@ public class FavoriteEntity {
 	
 	@ManyToOne
 	@JoinColumn(name = "registered_id")
-	private RegisterEntity registerEntity;
-	
-	
+	private RegisterEntity registerEntity;	
 }

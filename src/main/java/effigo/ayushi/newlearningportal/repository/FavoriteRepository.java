@@ -3,10 +3,12 @@ package effigo.ayushi.newlearningportal.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import effigo.ayushi.newlearningportal.entity.FavoriteEntity;
-import effigo.ayushi.newlearningportal.entity.UserEntity;
 
 public interface FavoriteRepository extends JpaRepository<FavoriteEntity, Long>{
-	List<FavoriteEntity> findByUser(UserEntity userEntity);
+	@Query
+//	("SELECT * FROM FavoriteEntity R WHERE R.RegisteredEntity.Registered");
+	List<FavoriteEntity> findByUserId(Long userId);
 }
