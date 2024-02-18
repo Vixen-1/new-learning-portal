@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import effigo.ayushi.newlearningportal.Mapper.FavoritePopulator;
@@ -18,6 +19,7 @@ import effigo.ayushi.newlearningportal.repository.RegisteredRepository;
 import effigo.ayushi.newlearningportal.repository.UserRepository;
 import effigo.ayushi.newlearningportal.service.FavoriteService;
 
+@Service
 public class FavoriteServiceImpl implements FavoriteService {
 
 	@Autowired

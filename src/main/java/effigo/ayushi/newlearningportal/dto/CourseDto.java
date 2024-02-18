@@ -16,12 +16,4 @@ public class CourseDto {
 	private String description;
 	private long price;
 	private List<CourseEntity.Category> category;
-	
-	public CourseDto(CourseEntity courseEntity) {
-		this.id = courseEntity.getId();
-		this.title = courseEntity.getTitle();
-		this.description = courseEntity.getDescription();
-		this.category = courseEntity.getCategory();
-		this.price = courseEntity.getPrice();
-	}
 }

@@ -35,8 +35,4 @@ public class RegisterEntity {
 	@JoinColumn(name = "course_id")
 	private CourseEntity course;
 	
-	
-	@OneToMany(mappedBy = "registerEntity", cascade = CascadeType.ALL)
-	@JsonIgnore	
-	private List<FavoriteEntity> favoritesEntities;
 }

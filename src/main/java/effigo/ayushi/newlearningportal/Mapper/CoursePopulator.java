@@ -1,7 +1,6 @@
 package effigo.ayushi.newlearningportal.Mapper;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import effigo.ayushi.newlearningportal.dto.CourseDto;
@@ -15,6 +14,5 @@ public interface CoursePopulator {
 	CourseDto mapToDto(CourseEntity courseEntity);
 	
 	//DTO to Entity
-	@Mapping(target = "course_id", ignore = true)
 	CourseEntity mapToEntity(CourseDto courseDto);
 }

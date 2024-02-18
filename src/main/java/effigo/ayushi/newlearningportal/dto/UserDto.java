@@ -14,11 +14,5 @@ public class UserDto {
 	private String password;
 	private UserEntity.Role role;
 	
-	public UserDto(UserEntity userEntity) {
-		this.id = userEntity.getId();
-		this.password = userEntity.getPassword();
-		this.username = userEntity.getUsername();
-		this.role = userEntity.getRole();
-	}
 	
 }

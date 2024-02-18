@@ -25,11 +25,11 @@ public class UserServiceImpl implements UserService{
     private UserPopulator userPopulator; 
 	
 	@Override
-	public UserDto getUserById(Long userId) throws ResponseStatusException{
+	public Optional<UserDto> getUserById(Long userId) throws ResponseStatusException{
 		Optional<UserEntity> userOptional = userRepository.findById(userId);
 		
 		if(userOptional.isPresent()) {
-			return userPopulator.mapToDto(userOptional.get());
+			return Optional.ofNullable(userPopulator.mapToDto(userOptional.get()));
 		}
 		
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "user not found with id : " + userId);
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService{
 	public UserDto createUser(UserDto userDto) {
 		UserEntity userEntity = userPopulator.populateUser(userDto);
         UserEntity savedUser = userRepository.save(userEntity);
-        return new UserDto(savedUser);
+        return userDto;
 	}
 	
 	@Override
@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService{
 			userEntity.setPassword(userDto.getPassword());
 			userEntity.setRole(userDto.getRole());
 			UserEntity updatedUserEntity = userRepository.save(userEntity);
-			return new UserDto(updatedUserEntity);
+			return userDto;
 		}
 		else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "USER DOES NOT EXIST!!");

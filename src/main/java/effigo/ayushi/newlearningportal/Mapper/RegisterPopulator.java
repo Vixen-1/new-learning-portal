@@ -15,6 +15,5 @@ public interface RegisterPopulator {
 	RegisterDto mapToDto(RegisterEntity registerEntity);
 	
 	//DTO to Entity
-	@Mapping(target = "course_id", ignore = true)
 	RegisterEntity mapToEntity(RegisterDto registerDto);
 }

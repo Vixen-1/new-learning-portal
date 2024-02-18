@@ -13,4 +13,5 @@ public interface FavoriteService {
 	FavoriteDto removeFavoriteDto(Long favId) throws ResponseStatusException;
 	
 	List<FavoriteDto> seeFavoriteCourse(Long userId)throws ResponseStatusException;
+	
 }

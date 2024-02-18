@@ -1,6 +1,8 @@
 package effigo.ayushi.newlearningportal.entity;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -40,7 +42,14 @@ public class UserEntity {
 	@Column(name = "user_role")
 	private Role role;
 	
-	@OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL)
-	@JsonIgnore
-	private List<FavoriteEntity> favoriteEntities;
+
+	//adding one to many relation
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private Set<RegisterEntity> registeredCourses = new HashSet<>();
+
+	public void addRegisteredCourse(RegisterEntity registeredCourse) {
+		registeredCourses.add(registeredCourse);
+		registeredCourse.setUser(this);
+	}
+
 }

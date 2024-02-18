@@ -1,15 +1,17 @@
 package effigo.ayushi.newlearningportal.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.web.server.ResponseStatusException;
 
 import effigo.ayushi.newlearningportal.dto.UserDto;
+import effigo.ayushi.newlearningportal.entity.UserEntity;
 import effigo.ayushi.newlearningportal.service.UserService;
 
 public interface UserService{
 	
-	UserDto getUserById(Long userId) throws ResponseStatusException;
+	Optional<UserDto> getUserById(Long userId) throws ResponseStatusException;
 	
 	UserDto createUser(UserDto userDto);
 	

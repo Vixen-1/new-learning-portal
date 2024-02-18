@@ -15,6 +15,5 @@ public interface FavoritePopulator {
 	FavoriteDto mapToDto(FavoriteEntity registerEntity);
 	
 	//DTO to Entity
-	@Mapping(target = "course_id", ignore = true)
 	FavoriteEntity mapToEntity(FavoriteDto registerDto);
 }

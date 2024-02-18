@@ -12,7 +12,6 @@ public interface UserPopulator {
 	UserPopulator INSTANCE = Mappers.getMapper(UserPopulator.class);
 	
 	//DTO to Entity
-	@Mapping(target = "user_id", ignore = true)
 	UserEntity populateUser(UserDto userDto);
 
 	//Entity to DTO

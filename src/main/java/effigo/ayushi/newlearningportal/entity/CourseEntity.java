@@ -36,7 +36,7 @@ public class CourseEntity {
 	private String description;
 	
 	@Column(name = "course_category")
-	private List<Category> category;
+	private Category category;
 	
 	@Column(name = "course_price")
 	private Long price;

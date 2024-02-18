@@ -2,6 +2,8 @@ package effigo.ayushi.newlearningportal.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -18,8 +20,9 @@ import lombok.NoArgsConstructor;
 public class FavoriteEntity {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "favorite_id")
-	private Long id;
+	private Long favouriteid;
 	
 	@ManyToOne
 	@JoinColumn(name = "registered_id")

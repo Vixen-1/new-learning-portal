@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import effigo.ayushi.newlearningportal.Mapper.RegisterPopulator;
@@ -18,6 +19,7 @@ import effigo.ayushi.newlearningportal.repository.RegisteredRepository;
 import effigo.ayushi.newlearningportal.repository.UserRepository;
 import effigo.ayushi.newlearningportal.service.RegisterService;
 
+@Service
 public class RegisterServiceImpl implements RegisterService{
 	@Autowired
 	private RegisteredRepository registerRepository;
@@ -42,7 +44,7 @@ public class RegisterServiceImpl implements RegisterService{
 			registerEntity.setUser(user);
 			registerEntity.setCourse(course);
 			RegisterEntity savedEntity = registerRepository.save(registerEntity);
-			return new RegisterDto(savedEntity);
+			return new RegisterDto();
 			
 		}
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User or course not found");
