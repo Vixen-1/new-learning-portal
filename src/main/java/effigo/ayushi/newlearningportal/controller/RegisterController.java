@@ -3,7 +3,6 @@ package effigo.ayushi.newlearningportal.controller;
 import java.util.List;
 
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +21,6 @@ public class RegisterController {
 	private final RegisterService registerService;
 	private static final Logger log = (Logger) LoggerFactory.getLogger(CourseController.class);
 
-	@Autowired
 	public RegisterController(RegisterService registerService) {
 		this.registerService = registerService;
 	}

@@ -2,13 +2,11 @@ package effigo.ayushi.newlearningportal.service;
 
 import java.util.List;
 
-import org.springframework.web.server.ResponseStatusException;
-
 import effigo.ayushi.newlearningportal.dto.CourseDto;
 import effigo.ayushi.newlearningportal.entity.CourseEntity;
 
 public interface CourseService {
-	
+
 	List<CourseEntity> getAllCourses();
 
 	CourseDto addCourse(CourseDto course);
@@ -16,5 +14,5 @@ public interface CourseService {
 	void deleteCourse(Long courseId);
 
 	CourseDto updateCourse(CourseDto course);
-	
+
 }

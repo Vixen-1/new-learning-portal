@@ -1,12 +1,9 @@
 package effigo.ayushi.newlearningportal.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +15,6 @@ import ch.qos.logback.classic.Logger;
 import effigo.ayushi.newlearningportal.dto.CourseDto;
 import effigo.ayushi.newlearningportal.dto.UserDto;
 import effigo.ayushi.newlearningportal.entity.CourseEntity;
-import effigo.ayushi.newlearningportal.entity.UserEntity.Role;
 import effigo.ayushi.newlearningportal.service.CourseService;
 import effigo.ayushi.newlearningportal.service.UserService;
 
@@ -43,31 +39,21 @@ public class CourseController {
 
 	@PostMapping
 	public CourseDto addCourse(@RequestBody CourseDto course, @RequestHeader Long id) {
-		Optional<UserDto> author = userService.getUserById(id);
+		UserDto author = userService.getUserById(id);
 
-		if (author.isPresent() && (author.get().getRole() == Role.AUTHOR)) {
+		if (author != null) {
 			log.info("course added");
 			return courseService.addCourse(course);
 		}
-		return new CourseDto();
-	}
-
-	@DeleteMapping("{id}")
-	public void deleteCourse(@PathVariable Long id, @RequestHeader Long user_Id) {
-		Optional<UserDto> isAuthor = userService.getUserById(user_Id);
-
-		if (isAuthor.isPresent() && (isAuthor.get().getRole() == Role.AUTHOR)) {
-			courseService.deleteCourse(id);
-			log.info("course deleted");
-		}
+		return null;
 	}
 
 	@PutMapping
 	public CourseDto updateCourse(@RequestBody CourseDto course, @RequestHeader Long user_Id) {
 
-		Optional<UserDto> isAuthor = userService.getUserById(user_Id);
+		UserDto isAuthor = userService.getUserById(user_Id);
 
-		if (isAuthor.isPresent() && (isAuthor.get().getRole() == Role.AUTHOR)) {
+		if (isAuthor != null) {
 			log.info("courses updated");
 			return courseService.updateCourse(course);
 		}

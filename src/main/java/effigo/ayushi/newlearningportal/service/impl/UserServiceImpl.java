@@ -16,67 +16,62 @@ import effigo.ayushi.newlearningportal.repository.UserRepository;
 import effigo.ayushi.newlearningportal.service.UserService;
 
 @Service
-public class UserServiceImpl implements UserService{
-	
+public class UserServiceImpl implements UserService {
+
 	@Autowired
 	private UserRepository userRepository;
 
 	@Autowired
-    private UserPopulator userPopulator; 
-	
+	private UserPopulator userPopulator;
+
 	@Override
-	public Optional<UserDto> getUserById(Long userId) throws ResponseStatusException{
+	public UserDto getUserById(Long userId) throws ResponseStatusException {
 		Optional<UserEntity> userOptional = userRepository.findById(userId);
-		
-		if(userOptional.isPresent()) {
-			return Optional.ofNullable(userPopulator.mapToDto(userOptional.get()));
+
+		if (userOptional.isPresent()) {
+			return (userPopulator.mapToDto(userOptional.get()));
 		}
-		
+
 		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "user not found with id : " + userId);
-		
+
 	}
-	
+
 	@Override
 	public UserDto createUser(UserDto userDto) {
 		UserEntity userEntity = userPopulator.populateUser(userDto);
-        UserEntity savedUser = userRepository.save(userEntity);
-        return userDto;
+		userRepository.save(userEntity);
+		return userDto;
 	}
-	
+
 	@Override
-	public UserDto updateUser(Long userId, UserDto userDto) throws ResponseStatusException{
+	public UserDto updateUser(Long userId, UserDto userDto) throws ResponseStatusException {
 		Optional<UserEntity> userOptional = userRepository.findById(userId);
-		if(userOptional.isPresent()) {
+		if (userOptional.isPresent()) {
 			UserEntity userEntity = userOptional.get();
 			userEntity.setUsername(userDto.getUsername());
 			userEntity.setPassword(userDto.getPassword());
 			userEntity.setRole(userDto.getRole());
-			UserEntity updatedUserEntity = userRepository.save(userEntity);
+			userRepository.save(userEntity);
 			return userDto;
-		}
-		else {
+		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "USER DOES NOT EXIST!!");
 		}
 	}
-	
+
 	@Override
-	public List<UserDto> getAllUsers(){
+	public List<UserDto> getAllUsers() {
 		List<UserEntity> usersEntity = userRepository.findAll();
-		return usersEntity.stream()
-				.map(userEntity -> userPopulator.mapToDto(userEntity))
-				.collect(Collectors.toList());
+		return usersEntity.stream().map(userEntity -> userPopulator.mapToDto(userEntity)).collect(Collectors.toList());
 	}
 
 	@Override
-	public void deleteUser(Long userId)throws ResponseStatusException {
-		// TODO Auto-generated method stub
-		if(userRepository.existsById(userId)){
+	public void deleteUser(Long userId) throws ResponseStatusException {
+
+		if (userRepository.existsById(userId)) {
 			userRepository.deleteById(userId);
-		}else {
+		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "USER WITH ID " + userId + " DOES NOT EXIST!");
 		}
 	}
-
-
 
 }

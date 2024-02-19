@@ -2,46 +2,38 @@ package effigo.ayushi.newlearningportal.controller;
 
 import java.util.List;
 
-import org.apache.el.stream.Optional;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ch.qos.logback.classic.Logger;
 import effigo.ayushi.newlearningportal.dto.UserDto;
-import effigo.ayushi.newlearningportal.entity.UserEntity;
 import effigo.ayushi.newlearningportal.service.UserService;
+import effigo.ayushi.newlearningportal.service.impl.UserServiceImpl;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 	private final UserService userService;
+	private final UserServiceImpl userServiceImpl;
 	private static final Logger log = (Logger) LoggerFactory.getLogger(CourseController.class);
 
-	@Autowired
 	public UserController(UserService userService) {
 		this.userService = userService;
+		this.userServiceImpl = new UserServiceImpl();
 	}
 
 	@GetMapping("/{id}")
-	public Optional<UserEntity> getUserById(@PathVariable Long id, @RequestHeader Long userId) {
-		//finding the user
-		Optional<UserEntity> isUser = userService.getUserById(userId);
-
-		//if user exists
-		if (isUser.isPresent()) {
-			log.info("user found");
-			return userService.getUserById(userId);
-		}
-		return Optional.empty();
+	public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
+		return new ResponseEntity<>(userServiceImpl.getUserById(id), HttpStatus.OK);
 	}
 
 	@PostMapping("/create")
